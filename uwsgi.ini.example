@@ -1,0 +1,5 @@
+[uwsgi]
+module = main
+callable = app
+master = true
+env=SECRET_KEY='ADD YOUR SECRET KEY'

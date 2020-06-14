@@ -9,7 +9,7 @@ ALLOWED_EXTENSIONS = {'txt', 'odf','md','docx'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-
+app.secret_key=os.environ['SECRET_KEY']
 
 
 def pandoc(arguments, cwd=None):
@@ -47,13 +47,35 @@ def upload_file():
                                     filename=filename))
     return '''
     <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
+    <head><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"></head>
+    <title>Add Linenumbers to Word Documents</title>
+    <div class="container">
+    <div class="jumpotron">
+    <h1 class="display-4">Upload a File</h1>
+    <p class="lead">Upload a Word Document and it will be converted to have line-numbers and be sent back to you</p>
     <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
+    <div class="form-group">
+    <div class="custom-file">
+        <input type=file  class="custom-file-input" name=file id="customFile">
+  <label class="custom-file-label" for="customFile">Choose file</label>
+    </div>
+    </div>
+    <div class="form-group">
+    <input type=submit class="btn btn-primary" value=Upload>
+    </div>
+    </div>
     </form>
-    '''
+    </div>
+    </div>
+ <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+    $('input[type="file"]').change(function(e){
+        var fileName = e.target.files[0].name;
+        $('.custom-file-label').html(fileName);
+    });
+</script>
+'''
 
 
 @app.route('/uploads/<filename>')
