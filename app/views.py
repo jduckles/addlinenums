@@ -49,7 +49,7 @@ def upload_file():
                                     filename=filename))
     return render_template("upload_form.html",
             title="Add Line Numbers",
-            help_text="Upload a Word Document and it will be converted to have line-numbers and be sent back to you"]
+            help_text="Upload a Word Document and it will be converted to have line-numbers and be sent back to you"
             )
 
 
