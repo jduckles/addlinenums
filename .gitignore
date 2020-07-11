@@ -1,3 +1,4 @@
 __pycache__
 env
 uwsgi.ini
+.start.sh.swp
